@@ -2,6 +2,7 @@
 
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour {
 
@@ -46,10 +47,11 @@ public class PlayerMovement : MonoBehaviour {
     private Vector3 normalVector = Vector3.up;
     private Vector3 wallNormalVector;
 
-    // Respawn Point.
+    // Respawn Point things.
     GameObject respawnPoint;
     GameObject player;
     GameObject[] checkPoints;
+    int deathCount = 0;
 
     void Awake() {
         rb = GetComponent<Rigidbody>();
@@ -75,28 +77,38 @@ public class PlayerMovement : MonoBehaviour {
         Respawn();
         SetSpawnPoint();
     }
+    /// <summary>
+    /// Respawns the player at it's previous checkpoint and 
+    /// increases the death counter.
+    /// </summary>
     void Respawn()
     {
         if (player.transform.position.y <= 5300f)
         {
+            deathCount++;
             player.transform.position = respawnPoint.transform.position;
+            GameObject.FindGameObjectWithTag("DeathCount").GetComponent<Text>().text = "Death Count: " + deathCount;
         }
     }
 
+    /// <summary>
+    /// Sets the spawn point of the player if it's near a checkpoint.
+    /// </summary>
     void SetSpawnPoint()
     {
         foreach (GameObject checkPoint in checkPoints)
         {
+            // Checks the distance of the player to the checkpoint.
             if (Vector3.Distance(player.transform.position, checkPoint.transform.position) < 10f 
+                // Checks the distance of the respawn point to the checkpoint. 
                 && Vector3.Distance(respawnPoint.transform.position, checkPoint.transform.position) > 10f)
             {
+                // Sets the spawn point to the location of the checkpoint.
                 Vector3 point = checkPoint.transform.position;
                 respawnPoint.transform.position = new Vector3(point.x, point.y + 5f, point.z);
                 Debug.Log("Set spawnpoint! : " + point);
             }
         }
-
-
     }
 
     /// <summary>
