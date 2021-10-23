@@ -51,6 +51,7 @@ public class PlayerMovement : MonoBehaviour {
     GameObject respawnPoint;
     GameObject player;
     GameObject[] checkPoints;
+    GameObject[] checkPointLights;
     int deathCount = 0;
 
     void Awake() {
@@ -58,6 +59,7 @@ public class PlayerMovement : MonoBehaviour {
         respawnPoint = GameObject.FindGameObjectWithTag("Respawn");
         player = GameObject.FindGameObjectWithTag("Player");
         checkPoints = GameObject.FindGameObjectsWithTag("CheckPoint");
+        checkPointLights = GameObject.FindGameObjectsWithTag("CheckPointLight");
     }
     
     void Start() {
@@ -107,6 +109,18 @@ public class PlayerMovement : MonoBehaviour {
                 Vector3 point = checkPoint.transform.position;
                 respawnPoint.transform.position = new Vector3(point.x, point.y + 5f, point.z);
                 Debug.Log("Set spawnpoint! : " + point);
+            }
+        }
+
+        foreach (GameObject checkPointLight in checkPointLights)
+        {
+            // Checks the distance of the player to the checkpoint.
+            if (Vector3.Distance(player.transform.position, checkPointLight.transform.position) < 10f 
+                && checkPointLight.GetComponentInChildren<Light>().color != new Color32(189, 90, 219, 255))
+            {
+                // Changes light color
+                checkPointLight.GetComponentInChildren<Light>().color = new Color32(189, 90, 219, 255);
+                Debug.Log("Check Point Light Changed!");
             }
         }
     }

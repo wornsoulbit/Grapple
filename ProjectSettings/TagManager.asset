@@ -8,6 +8,7 @@ TagManager:
   - CheckPoint
   - Timer
   - DeathCount
+  - CheckPointLight
   layers:
   - Default
   - TransparentFX
