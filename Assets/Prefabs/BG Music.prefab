@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8114893683998978192}
   - component: {fileID: 8114893683998978199}
   - component: {fileID: 8114893685216507051}
-  - component: {fileID: 102685557472966801}
   m_Layer: 0
   m_Name: BG Music
   m_TagString: Untagged
@@ -42,7 +41,7 @@ AudioSource:
   m_GameObject: {fileID: 8114893683998978198}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: a4406a6e54cbfa04882a0a75ad77f362, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -148,15 +147,3 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &102685557472966801
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8114893683998978198}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33f4551a353ad6547811a4238dc36442, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

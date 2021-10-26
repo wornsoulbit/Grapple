@@ -1778,7 +1778,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: BG Music
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 102685557472966801, guid: 5792aa9af682ed447a5a680be202fd9e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5792aa9af682ed447a5a680be202fd9e, type: 3}
 --- !u!95 &2016104882 stripped
 Animator:
@@ -1798,6 +1799,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5021835935308287707, guid: 657eee6e83fb3dc4fb00baa5f1996b8b, type: 3}
       propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5021835935308287707, guid: 657eee6e83fb3dc4fb00baa5f1996b8b, type: 3}
+      propertyPath: m_MatchWidthOrHeight
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5021835936289205315, guid: 657eee6e83fb3dc4fb00baa5f1996b8b, type: 3}

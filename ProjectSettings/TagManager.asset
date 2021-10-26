@@ -9,6 +9,7 @@ TagManager:
   - Timer
   - DeathCount
   - CheckPointLight
+  - MainMenu
   layers:
   - Default
   - TransparentFX
