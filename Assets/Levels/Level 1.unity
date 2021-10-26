@@ -1722,6 +1722,14 @@ PrefabInstance:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: a1c19204466cefc4ba89e7242205e642, type: 3}
+    - target: {fileID: 8114893683998978192, guid: 5792aa9af682ed447a5a680be202fd9e, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8114893683998978199, guid: 5792aa9af682ed447a5a680be202fd9e, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: a1c19204466cefc4ba89e7242205e642, type: 3}
     - target: {fileID: 9086511553412048950, guid: 5792aa9af682ed447a5a680be202fd9e, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1774,7 +1782,7 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: 5792aa9af682ed447a5a680be202fd9e, type: 3}
 --- !u!95 &2016104882 stripped
 Animator:
-  m_CorrespondingSourceObject: {fileID: 103288435686028901, guid: 5792aa9af682ed447a5a680be202fd9e, type: 3}
+  m_CorrespondingSourceObject: {fileID: 8114893685216507051, guid: 5792aa9af682ed447a5a680be202fd9e, type: 3}
   m_PrefabInstance: {fileID: 2016104881}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5021835936463631658
