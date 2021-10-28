@@ -13,8 +13,8 @@ public class Settings : MonoBehaviour
 
     private void Start()
     {
-        mainMenu = GameObject.FindGameObjectsWithTag("MainMenu")[1];
-        settings = GameObject.FindGameObjectsWithTag("MainMenu")[0];
+        mainMenu = GameObject.Find("MainMenu");
+        settings = GameObject.Find("Settings");
         settings.SetActive(false);
     }
 
@@ -39,5 +39,10 @@ public class Settings : MonoBehaviour
     public void SetVolume(float volume)
     {
         audioMixer.SetFloat("volume", volume);
+    }
+
+    public void SetMusicVolume(float volume)
+    {
+        audioMixer.
     }
 }
