@@ -40,9 +40,4 @@ public class Settings : MonoBehaviour
     {
         audioMixer.SetFloat("volume", volume);
     }
-
-    public void SetMusicVolume(float volume)
-    {
-        audioMixer.
-    }
 }

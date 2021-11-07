@@ -12,6 +12,11 @@ public class PlayerMovement : MonoBehaviour {
 
     //Other
     private Rigidbody rb;
+    bool paused = false;
+    bool finished = false;
+    public GameObject settings;
+    public GameObject endLevel;
+    public GameObject hud;
 
     //Rotation and look
     private float xRotation;
@@ -63,22 +68,64 @@ public class PlayerMovement : MonoBehaviour {
     }
     
     void Start() {
+        settings.SetActive(false);
+        endLevel.SetActive(false);
         playerScale =  transform.localScale;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
-
     
     private void FixedUpdate() {
         Movement();
     }
 
     private void Update() {
-        MyInput();
-        Look();
-        Respawn();
-        SetSpawnPoint();
+        if (!finished)
+        {
+            MyInput();
+            Look();
+            Respawn();
+            SetSpawnPoint();
+            End();
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                // Paused.
+                if (paused)
+                {
+                    UnPause();
+                    Debug.Log("Un Pause");
+                }
+                // Not paused.
+                else
+                {
+                    Pause();
+                    Debug.Log("Pause");
+                }
+            }
+        }
     }
+
+    void Pause()
+    {
+        Time.timeScale = 0;
+        paused = !paused;
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
+        settings.SetActive(true);
+        hud.SetActive(false);
+    }
+
+    void UnPause()
+    {
+        Time.timeScale = 1;
+        paused = !paused;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        settings.SetActive(false);
+        hud.SetActive(true);
+    }
+
     /// <summary>
     /// Respawns the player at it's previous checkpoint and 
     /// increases the death counter.
@@ -122,6 +169,20 @@ public class PlayerMovement : MonoBehaviour {
                 checkPointLight.GetComponentInChildren<Light>().color = new Color32(189, 90, 219, 255);
                 Debug.Log("Check Point Light Changed!");
             }
+        }
+    }
+
+    void End()
+    {
+        if (checkPointLights[3].GetComponentInChildren<Light>().color == new Color32(189, 90, 219, 255))
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+            endLevel.SetActive(true);
+            hud.SetActive(false);
+            endLevel.GetComponentsInChildren<Text>()[1].text = "Level Completed in: ";
+            endLevel.GetComponentsInChildren<Text>()[2].text = "Death Counts: " + deathCount;
+            finished = true;
         }
     }
 
@@ -227,20 +288,23 @@ public class PlayerMovement : MonoBehaviour {
     
     private float desiredX;
     private void Look() {
-        float mouseX = Input.GetAxis("Mouse X") * sensitivity * Time.fixedDeltaTime * sensMultiplier;
-        float mouseY = Input.GetAxis("Mouse Y") * sensitivity * Time.fixedDeltaTime * sensMultiplier;
+        if (!paused)
+        {
+            float mouseX = Input.GetAxis("Mouse X") * sensitivity * Time.fixedDeltaTime * sensMultiplier;
+            float mouseY = Input.GetAxis("Mouse Y") * sensitivity * Time.fixedDeltaTime * sensMultiplier;
 
-        //Find current look rotation
-        Vector3 rot = playerCam.transform.localRotation.eulerAngles;
-        desiredX = rot.y + mouseX;
-        
-        //Rotate, and also make sure we dont over- or under-rotate.
-        xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+            //Find current look rotation
+            Vector3 rot = playerCam.transform.localRotation.eulerAngles;
+            desiredX = rot.y + mouseX;
 
-        //Perform the rotations
-        playerCam.transform.localRotation = Quaternion.Euler(xRotation, desiredX, 0);
-        orientation.transform.localRotation = Quaternion.Euler(0, desiredX, 0);
+            //Rotate, and also make sure we dont over- or under-rotate.
+            xRotation -= mouseY;
+            xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+
+            //Perform the rotations
+            playerCam.transform.localRotation = Quaternion.Euler(xRotation, desiredX, 0);
+            orientation.transform.localRotation = Quaternion.Euler(0, desiredX, 0);
+        }
     }
 
     private void CounterMovement(float x, float y, Vector2 mag) {
